@@ -197,6 +197,13 @@ if(CMAKE_COMPILER_IS_GNUCXX OR (CMAKE_CXX_COMPILER_ID MATCHES "Clang"))
     if (NOT ${ALLOW_EXCEPTIONS})
         list(APPEND COMPILER_FLAGS "-fno-exceptions")
     endif()
+
+    if (NOT DEFINED ALLOW_RTTI)
+        option(ALLOW_RTTI "Allow runtime type information (RTTI)" OFF)
+    endif()
+    if (NOT ${ALLOW_RTTI})
+        list(APPEND COMPILER_FLAGS "-fno-rtti")  # disable runtime type information
+    endif()
 endif()
 
 string(REPLACE ";" " " COMPILER_FLAGS_STRING "${COMPILER_FLAGS}")
